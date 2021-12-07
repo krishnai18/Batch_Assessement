@@ -9,8 +9,8 @@ namespace BatchAssessment.Models
     public class Atribute
     {
        // public Guid BatchId { get; set; }
-       //[Key]
-        //public int Id { get; set; }
+        //[Key]
+      //  public string BusinessUnit { get; set; }
         [Key]
         [Required]
         public string Key { get; set; }

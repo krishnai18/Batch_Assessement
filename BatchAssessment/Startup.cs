@@ -1,6 +1,7 @@
 using BatchAssessment.Data;
 using BatchAssessment.IRepository;
 using BatchAssessment.Repository;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -41,11 +42,14 @@ namespace BatchAssessment
                         Version = "1"
                     });
             });
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation(s =>
+            {
+                s.RegisterValidatorsFromAssemblyContaining<Startup>();
+            }); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env) //, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -58,6 +62,7 @@ namespace BatchAssessment
                 options.SwaggerEndpoint("/swagger/BatchOpenAPISpec/swagger.json", "Batch API");
                 options.RoutePrefix = "";
             });
+          //  loggerFactory.CreateLogger("Logs/mylog-{Date}.txt");
             app.UseRouting();
 
             app.UseAuthorization();

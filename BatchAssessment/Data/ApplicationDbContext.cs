@@ -13,7 +13,7 @@ namespace BatchAssessment.Data
         {
 
         }
-
+        public DbSet<BusinessUnits> BusinessUnit { get; set; }
         public DbSet<BatchModel> Batches { get; set; }
 
         public DbSet<Models.Atribute> Attributes { get; set; }

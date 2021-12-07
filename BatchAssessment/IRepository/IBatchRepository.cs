@@ -16,5 +16,7 @@ namespace BatchAssessment.IRepository
         bool CheckAttribute(IEnumerable<Models.Atribute> attributesList);
 
         bool CheckACL(IEnumerable<Models.ACL> aclList);
+        bool UpdateBatch(BatchModel batchObj);
+        bool Save();
     }
 }

@@ -19,7 +19,15 @@ namespace BatchAssessment.Repository
         }
         public bool CheckACL(IEnumerable<ACL> aclList)
         {
-            throw new NotImplementedException();
+            if (aclList.Count() > 0)
+            {
+                foreach (var item in aclList)
+                {
+                    if (string.IsNullOrEmpty(item.ReadUser) || string.IsNullOrEmpty(item.ReadGroup))
+                        return false;
+                }
+            }
+            return true;
         }
     
 
@@ -46,17 +54,25 @@ namespace BatchAssessment.Repository
         public bool CreateBatch(BatchModel batchObj)
         {
             _db.Batches.Add(batchObj);
+            return Save();
+        }
+        public bool UpdateBatch(BatchModel batchObj)
+        {
+            _db.Batches.Update(batchObj);
+            return Save();
+        }
+        public bool Save()
+        {
             return _db.SaveChanges() >= 0 ? true : false;
         }
-
         public BatchModel GetBatch(Guid batchId)
         {
-           return _db.Batches.Include(b => b.Attributes).ToList().FirstOrDefault(b => b.BatchId == batchId);
+           return _db.Batches.Include(b => b.Attributes).Include(b=>b.ACLs).ToList().FirstOrDefault(b => b.BatchId == batchId);
         }
 
         public ICollection<BatchModel> GetBatches()
         {
-            throw new NotImplementedException();
+            return _db.Batches.OrderBy(a => a.BusinessUnit).ToList();
         }
     }
 }

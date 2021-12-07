@@ -10,8 +10,8 @@ namespace BatchAssessment.Models
     {
        // [Key]
      // public int Id { get; set; }
-      //  public Guid BatchId { get; set; }
-     
+     //  public Guid BatchId { get; set; }
+     //   public string BusinessUnit { get; set; }
         [Key]
         public string ReadUser { get; set; }
         public string ReadGroup { get; set; }

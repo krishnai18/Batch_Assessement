@@ -7,23 +7,14 @@ using System.Threading.Tasks;
 
 namespace BatchAssessment.Models
 {
-    public class BatchModel
+    public class BusinessUnits
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid BatchId { get; set; }
-
-        
-        [Required]
-        [Display(Name = "BusinessUnit")]
         public string BusinessUnit { get; set; }
-       // public int AttributeId { get; set; }
-       // public int aclId { get; set; }
+
         public IEnumerable<ACL> ACLs { get; set; }
         public IEnumerable<Atribute> Attributes { get; set; }
-        public DateTime ExpiryDate { get; set; }
-       
-        //public string BusinessUnitId { get; set; }
+        public Guid BatchId { get; set; }
+        //BatchModel batch = new BatchModel();
     }
-
 }
